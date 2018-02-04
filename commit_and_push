@@ -1,0 +1,15 @@
+#!/bin/bash
+if [ -n "$1" ]
+then
+  echo "Commiting - $1"
+else
+  echo "Usage : ./commit_and_push \"Commit message\""
+  exit
+fi
+
+#update the txt dump - this helps git see the history of changes
+sqlite3 songs.sqlite .dump > songs.txt
+
+#Commit and push
+git commit -a -m "$1"
+git push
